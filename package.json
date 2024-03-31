@@ -1,0 +1,19 @@
+{
+  "name": "nasaapiwebapp",
+  "version": "1.0.0",
+  "description": "----- Just a loose plan for now, functionalities will definetely include looking up photos taken by martian rovers on a given date, as well as martian weather reports",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.6.8",
+    "body-parser": "^1.20.2",
+    "ejs": "^3.1.9",
+    "express": "^4.19.2"
+  }
+}
