@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles/main.css">
+    <title>Document</title>
+
+</head>
+
+<body>
+
+    <h1>test</h1>
+    <% if (locals.photoURL) { %>
+        <img src="<%=photoURL%>" alt="">
+        <% } %>
+            <% if (locals.alert) { %>
+                <%=alert%>
+                    <% } %>
+                        <form action="" method="post">
+                            <input type="date" name="date" id="chosen-date">
+                            <input type="submit" value="submit" formaction="/submit">
+                        </form>
+</body>
+
+</html>
