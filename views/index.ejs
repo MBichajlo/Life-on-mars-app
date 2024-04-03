@@ -1,27 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
+<%- include("partials/header.ejs") %>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/styles/main.css">
-    <title>Document</title>
+    <body>
 
-</head>
+        <h1>test</h1>
+        <% if (locals.photoURL) { %>
+            <img src="<%=photoURL%>" alt="">
+            <% } %>
+                <% if (locals.alert) { %>
+                    <%=alert%>
+                        <% } %>
 
-<body>
+                            <form action="" method="post">
 
-    <h1>test</h1>
-    <% if (locals.photoURL) { %>
-        <img src="<%=photoURL%>" alt="">
-        <% } %>
-            <% if (locals.alert) { %>
-                <%=alert%>
-                    <% } %>
-                        <form action="" method="post">
-                            <input type="date" name="date" id="chosen-date">
-                            <input type="submit" value="submit" formaction="/submit">
-                        </form>
-</body>
+                                <input type="date" min="2004-01-04" max="<%=highestPossibleDate%>" name="date"
+                                    id="chosen-date">
+                                <input type="submit" value="submit" formaction="/submit">
+                            </form>
 
-</html>
+    </body>
+
+    <%- include("partials/footer.ejs") %>
