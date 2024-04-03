@@ -8,6 +8,7 @@ import dotenv from "dotenv/config";
 
 import { getMaxAndMinDate } from "./rovers.js";
 import { Rover } from "./rovers.js";
+import { getCurrentMarsPosition } from "./marsEarthDistance.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const app = express();
@@ -68,6 +69,17 @@ app.post("/submit", async (req, res) => {
   res.render("photo.ejs", {
     photo: photo,
   });
+});
+
+app.get("/currentDistance", async (req, res) => {
+  try {
+    const position = await getCurrentMarsPosition();
+    res.render("currentDistance.ejs", {
+      position: position,
+    });
+  } catch (error) {
+    res.send(error.code);
+  }
 });
 
 app.listen(port, () => {

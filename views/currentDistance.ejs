@@ -1,0 +1,14 @@
+<%- include("partials/header.ejs") %>
+
+    <body>
+        <% if (locals.position) { %>
+            <h2>Mars is currently <%=position.distance%> AUs from Earth and has a relative speed of <%=position.speed%>
+                        Km/s
+            </h2>
+            <% }else{%>
+                <h1>error</h1>
+                <% } %>
+
+    </body>
+
+    <%- include("partials/footer.ejs") %>
