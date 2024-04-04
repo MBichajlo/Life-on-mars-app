@@ -8,6 +8,22 @@
             <% }else{ %>
                 <h1>Unfortunately, no rovers took a photo that day</h1>
                 <%}%>
+                    <form action=""> Choose another rover
+                        <select name="rover" id="roverInput">
+                            <% for(const r of rovers) { %>
+
+                                <option value="<%=r.name%>">
+                                    <%=r.name%>
+                                </option>
+                                <% } %>
+
+                        </select>
+                        <select name="camera" id="cameraInput">
+                        </select>
+                    </form>
+
+                    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+                    <script src="/scripts/photo.js"></script>
     </body>
 
     <%- include("partials/footer.ejs") %>

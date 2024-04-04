@@ -28,7 +28,7 @@ const lowestPossibleDate = "2004-01-04";
 const perseverance = new Rover("Perseverance", "2021-02-18", "2024-04-01");
 const curiosity = new Rover("Curiosity", "2012-08-06", "2024-02-19");
 //****
-const rovers = [spirit, opportunity, perseverance, curiosity];
+export const rovers = [spirit, opportunity, perseverance, curiosity];
 
 app.get("/", async (req, res) => {
   res.render("index.ejs", {
@@ -53,7 +53,7 @@ app.post("/submit", async (req, res) => {
   for (const r of possibleRovers) {
     try {
       const nasaResponse = await axios.get(
-        `http://mars-photos.herokuapp.com/api/v1/rovers/${r.name}/photos?earth_date=${req.body.date}&camera=fhaz`
+        `http://mars-photos.herokuapp.com/api/v1/rovers/${r.name}/photos?earth_date=${req.body.date}`
       );
       console.log(nasaResponse.data);
       if (nasaResponse.data.photos.length != 0) {
@@ -68,6 +68,7 @@ app.post("/submit", async (req, res) => {
   console.log(photo.rover);
   res.render("photo.ejs", {
     photo: photo,
+    rovers: rovers,
   });
 });
 
