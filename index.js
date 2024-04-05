@@ -9,6 +9,7 @@ import dotenv from "dotenv/config";
 import { getMaxAndMinDate } from "./rovers.js";
 import { Rover } from "./rovers.js";
 import { getCurrentMarsPosition } from "./marsEarthDistance.js";
+import { getWeather } from "./weather.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const app = express();
@@ -81,6 +82,11 @@ app.get("/currentDistance", async (req, res) => {
   } catch (error) {
     res.send(error.code);
   }
+});
+
+app.get("/weather", async (req, res) => {
+  const theFuck = await getWeather();
+  res.send(theFuck);
 });
 
 app.listen(port, () => {
