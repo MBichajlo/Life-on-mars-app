@@ -3,7 +3,8 @@
     <body>
         <% if (photo !="" ) { %>
             <img src="<%= photo.img_src%>" alt="">
-            <h1> Photo taken by the <%=photo.rover.name%> rover and it's <%=photo.camera.full_name%>
+            <h1> Photo taken by the <%=photo.rover.name%> rover and it's <%=photo.camera.full_name%> on
+                        <%=photo.earth_date%> Earth date.
             </h1>
             <% }else{ %>
                 <h1>Unfortunately, no rovers took a photo that day</h1>

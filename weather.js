@@ -27,9 +27,27 @@ export async function getWeather() {
       min_ground_temp: json.magnitudes.min_gts_temp,
       max_ground_temp: json.magnitudes.max_gts_temp,
       overallWeather: json.magnitudes.atmo_opacity,
+      sunrise: json.magnitudes.sunrise,
+      sunset: json.magnitudes.sunset,
+      month: json.magnitudes.season.split(" ")[1],
+      season: getSeason(json.magnitudes.season),
     };
     return interestingData;
   } catch (error) {
     console.log(error);
+  }
+}
+
+function getSeason(month) {
+  month = parseInt(month.split(" ")[1]);
+  console.log(month);
+  if (month < 4) {
+    return "Autumn";
+  } else if (month < 7) {
+    return "Winter";
+  } else if (month < 10) {
+    return "Spring";
+  } else {
+    return "Summer";
   }
 }

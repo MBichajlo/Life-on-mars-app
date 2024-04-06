@@ -39,6 +39,26 @@ app.get("/", async (req, res) => {
   });
 });
 
+app.get("/latestPhotos", async (req, res) => {
+  try {
+    const latestPhoto = await axios.get(
+      "http://mars-photos.herokuapp.com/api/v1/rovers/perseverance/latest_photos"
+    );
+    console.log(typeof latestPhoto.data["latest_photos"]);
+    // res.send(latestPhoto.data.latest_photos[0]);
+    res.render("photo.ejs", {
+      photo:
+        latestPhoto.data.latest_photos[
+          Math.floor(Math.random() * latestPhoto.data.latest_photos.length)
+        ],
+      rovers: rovers,
+    });
+  } catch (error) {
+    console.log(error);
+    res.send(error);
+  }
+});
+
 app.post("/submit", async (req, res) => {
   console.log(req.body.date);
   //Checking which rovers are available for this day
@@ -85,8 +105,8 @@ app.get("/currentDistance", async (req, res) => {
 });
 
 app.get("/weather", async (req, res) => {
-  const theFuck = await getWeather();
-  res.send(theFuck);
+  const weatherData = await getWeather();
+  res.send(weatherData);
 });
 
 app.listen(port, () => {
