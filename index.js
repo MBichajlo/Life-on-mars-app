@@ -35,7 +35,7 @@ app.get("/", async (req, res) => {
   res.render("index.ejs", {
     // rovers: rovers,
     // highestPossibleDate: apiResult.maxDate,
-    highestPossibleDate: "2024-04-01",
+    highestPossibleDate: 2024,
   });
 });
 

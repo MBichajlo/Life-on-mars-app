@@ -1,3 +1,104 @@
-h1{
-    color: red;
+/* index.ejs */
+:root{
+    --light-orange:#A26C4D;
+    --beige:#CBD0B9;
+    --light-gray:#797979;
+    --dark-gray:#333333;
+}
+
+@font-face {
+    font-family: "Aesthetic";
+    src: url("../assets/fonts/aesthetic_5/Aesthetic-Regular.ttf") format("truetype");
+}
+
+@font-face {
+    font-family:"Creato Display" ;
+    src: url("../assets/fonts/creato_display/CreatoDisplay-Light.otf") format("opentype") ;
+    font-weight: normal;
+    font-style: normal;    
+}
+
+@font-face {
+    font-family: "Creato Display";
+    src: url("../assets/fonts/creato_display/CreatoDisplay-Bold.otf") format("opentype");
+    font-style: normal;
+    font-weight: bold;
+}
+
+
+
+
+
+body{
+    min-height: 100vh;
+    margin: 0;
+    background-image: url("../assets/images/black-wall-texture.jpg");
+    background-color: #333333;
+    background-position: center;
+    background-size: cover;
+}
+
+body *{
+    font-family: "Creato Display",monospace;
+}
+
+.home-page{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+}
+
+
+
+
+.date-select{
+    display: flex;
+    flex-direction: row;
+    width: 70%;
+    justify-content: space-around;
+    z-index: 1;
+}
+
+.select-button{
+    width: 150px;
+    height: 40px;
+    border: none;
+    border-radius: 10px;
+    background-color: var(--beige);
+    color: var(--dark-gray);
+}
+
+.select-dropdown{
+    list-style: none;
+    height: 0px;
+    width: 100px;
+    background-color: var(--beige);
+    overflow: hidden;
+    overflow-y: scroll;
+    visibility: hidden;
+    opacity: 0;
+    transition: all .4s ease-in-out;
+    
+}
+.select-dropdown.active{
+    visibility: visible;
+    height: 150px;
+    opacity: 1;
+}
+
+
+
+h1.site-title{
+    font-family: "Aesthetic",monospace;
+    color: #A26C4D;
+    font-size: 5rem;
+}
+
+#mars-photo{
+    width: 50%;
+    position:fixed;
+    bottom: -360px;
+    right: 25%;
 }

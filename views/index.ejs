@@ -2,25 +2,83 @@
 
     <body>
 
-        <h1>test</h1>
-        <% if (locals.photoURL) { %>
-            <img src="<%=photoURL%>" alt="">
-            <% } %>
-                <% if (locals.alert) { %>
-                    <%=alert%>
-                        <% } %>
+        <div class="home-page">
+            <h1 class="site-title">Life on mars</h1>
 
-                            <form action="" method="post">
+            <div class="date-select">
+                <div class="select-year">
+                    <button class="select-button">
+                        <span>
+                            Click me!
+                        </span>
+                    </button>
+                    <ul class="select-dropdown">
+                        <% for( let index=2004; index <=highestPossibleDate; index++ ) { %>
+                            <li>
+                                <input type="radio" id="year-<%=index%>" name="year">
+                                <label for="year-<%=index%>">
+                                    <%=index%>
+                                </label>
+                            </li>
+                            <% } %>
+                    </ul>
+                </div>
+                <div class="select-month">
+                    <button class="select-button">
+                        <span>
+                            Click me!
+                        </span>
+                    </button>
+                    <ul class="select-dropdown">
+                        <% for( let index=2004; index <=highestPossibleDate; index++ ) { %>
+                            <li>
+                                <input type="radio" id="year-<%=index%>" name="year">
+                                <label for="year-<%=index%>">
+                                    <%=index%>
+                                </label>
+                            </li>
+                            <% } %>
+                    </ul>
+                </div>
+                <div class="select-month">
+                    <button class="select-button">
+                        <span>
+                            Click me!
+                        </span>
+                    </button>
+                    <ul class="select-dropdown">
+                        <% for( let index=2004; index <=highestPossibleDate; index++ ) { %>
+                            <li>
+                                <input type="radio" id="year-<%=index%>" name="year">
+                                <label for="year-<%=index%>">
+                                    <%=index%>
+                                </label>
+                            </li>
+                            <% } %>
+                    </ul>
+                </div>
 
-                                <input type="date" min="2004-01-04" max="<%=highestPossibleDate%>" name="date"
-                                    id="chosen-date">
-                                <input type="submit" value="submit" formaction="/submit">
-                            </form>
-                            <a href="/latestPhotos">
-                                <button>
-                                    Get random latest photo
-                                </button>
-                            </a>
+            </div>
+
+
+            <div class="date-select">
+                <form action="" method="post">
+
+
+                    <input type="date" min="2004-01-04" max="<%=highestPossibleDate%>" name="date" id="chosen-date">
+                    <input type="submit" value="submit" formaction="/submit">
+                </form>
+
+            </div>
+            <a href="/latestPhotos">
+                <button>
+                    Get random latest photo
+                </button>
+            </a>
+            <img id="mars-photo" src="/assets/images/mars-globe-valles-marineris-enhanced.png" alt="">
+        </div>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+        <script src="/scripts/dropdown.js"></script>
     </body>
 
     <%- include("partials/footer.ejs") %>
