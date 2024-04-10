@@ -65,29 +65,69 @@ body *{
     width: 150px;
     height: 40px;
     border: none;
-    border-radius: 10px;
+    
     background-color: var(--beige);
     color: var(--dark-gray);
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    
 }
 
+.dropdown-menu{
+    overflow-y: hidden;
+    border-radius:10px;
+    transition: all .2s ease-in-out;
+}
 .select-dropdown{
     list-style: none;
+    margin: 0;
+    padding: 0;
     height: 0px;
-    width: 100px;
+    width: 150px;
     background-color: var(--beige);
     overflow: hidden;
     overflow-y: scroll;
     visibility: hidden;
     opacity: 0;
-    transition: all .4s ease-in-out;
+    transition: all .3s ease-out;
+    scrollbar-color:var(--light-orange) var(--beige) ;
+    
     
 }
 .select-dropdown.active{
     visibility: visible;
     height: 150px;
     opacity: 1;
+    
+}
+.select-dropdown li {
+    display: flex;
 }
 
+.select-dropdown li input{
+    margin: 0;
+}
+.select-dropdown li label{
+    width: 100%;
+    margin: 0;
+}
+
+.select-dropdown li input{
+    appearance: none;
+}
+
+.select-dropdown li:hover,
+.select-dropdown input:checked ~ label{
+    appearance: none;
+    background-color:var(--light-gray);
+}
+
+.select-dropdown li:active{
+    background-color: #A26C4D;
+}
 
 
 h1.site-title{

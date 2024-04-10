@@ -28,6 +28,7 @@ const lowestPossibleDate = "2004-01-04";
 //For development purpose only ***
 const perseverance = new Rover("Perseverance", "2021-02-18", "2024-04-01");
 const curiosity = new Rover("Curiosity", "2012-08-06", "2024-02-19");
+
 //****
 export const rovers = [spirit, opportunity, perseverance, curiosity];
 
@@ -35,7 +36,7 @@ app.get("/", async (req, res) => {
   res.render("index.ejs", {
     // rovers: rovers,
     // highestPossibleDate: apiResult.maxDate,
-    highestPossibleDate: 2024,
+    highestPossibleDate: "2024-04-01",
   });
 });
 
