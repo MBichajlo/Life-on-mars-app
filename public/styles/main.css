@@ -26,9 +26,14 @@
 }
 
 
+form{
+    display: contents;
+}
 
-
-
+.actual-data{
+    display: none;
+    visibility: hidden;
+}
 body{
     min-height: 100vh;
     margin: 0;
@@ -59,9 +64,10 @@ body *{
     width: 70%;
     justify-content: space-around;
     z-index: 1;
+    
 }
 
-.select-button{
+.select-button,.submit-button{
     width: 150px;
     height: 40px;
     border: none;
@@ -75,11 +81,25 @@ body *{
     align-items: center;
     
 }
+.submit-button{
+    border-radius: 10px;
+}
+.select-button svg{
+    transition: all .2s ease-in-out;
+}
+.select-button svg.active{
+    transform: rotate(180deg);
+}
+
 
 .dropdown-menu{
     overflow-y: hidden;
     border-radius:10px;
     transition: all .2s ease-in-out;
+    height: 40px;
+}
+.dropdown-menu.active{
+    height: 190px;
 }
 .select-dropdown{
     list-style: none;

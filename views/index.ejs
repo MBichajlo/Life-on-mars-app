@@ -5,52 +5,72 @@
         <div class="home-page">
             <h1 class="site-title">Life on mars</h1>
 
+
+
             <div class="date-select" data-="<%=highestPossibleDate%>">
-                <div class="select-year dropdown-menu">
-                    <button class="select-button">
-                        <span>
-                            Click me!
-                        </span>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                            class="bi bi-chevron-down" viewBox="0 0 16 16">
-                            <path fill-rule="evenodd"
-                                d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708" />
-                        </svg>
-                    </button>
-                    <ul class="select-dropdown">
+                <form action="/submit" method="post">
+                    <div class="select-year dropdown-menu">
+                        <button class="select-button" type="button">
+                            <span>
+                                Year
+                            </span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-chevron-down" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd"
+                                    d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708" />
+                            </svg>
+                        </button>
+                        <ul class="select-dropdown">
 
-                    </ul>
-                </div>
-                <div class="select-month dropdown-menu">
-                    <button class="select-button">
-                        <span>
-                            Click me!
-                        </span>
-                    </button>
-                    <ul class="select-dropdown">
+                        </ul>
+                    </div>
+                    <div class="select-month dropdown-menu">
+                        <button class="select-button" type="button">
+                            <span>
+                                Month
+                            </span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-chevron-down" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd"
+                                    d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708" />
+                            </svg>
+                        </button>
+                        <ul class="select-dropdown">
 
-                    </ul>
-                </div>
-                <div class="select-day dropdown-menu">
-                    <button class="select-button">
-                        <span>
-                            Click me!
-                        </span>
-                    </button>
-                    <ul class="select-dropdown">
-                        <% for( let index=2004; index <=highestPossibleDate; index++ ) { %>
-                            <li>
-                                <input type="radio" id="day-<%=index%>" class="dropdown-input" name="day"
-                                    value="<%=index%>">
-                                <label for="day-<%=index%>">
-                                    <%=index%>
-                                </label>
-                            </li>
-                            <% } %>
-                    </ul>
-                </div>
+                        </ul>
+                    </div>
+                    <div class="select-day dropdown-menu">
+                        <button class="select-button" type="button">
+                            <span>
+                                Day
+                            </span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-chevron-down" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd"
+                                    d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708" />
+                            </svg>
+                        </button>
+                        <ul class="select-dropdown">
 
+                        </ul>
+                    </div>
+                    <div>
+
+                        <button class="submit-button">
+                            <span>
+                                Go!
+                            </span>
+
+                        </button>
+
+                    </div>
+
+                    <input class="actual-data" name="date" type="text" value="">
+
+                </form>
             </div>
+
+
 
 
             <!-- <div class="date-select">
@@ -62,13 +82,14 @@
                 </form>
 
             </div> -->
-            <a href="/latestPhotos">
+            <!-- <a href="/latestPhotos">
                 <button>
                     Get random latest photo
                 </button>
-            </a>
+            </a> -->
             <img id="mars-photo" src="/assets/images/mars-globe-valles-marineris-enhanced.png" alt="">
         </div>
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
         <script src="/scripts/dropdown.js"></script>
     </body>

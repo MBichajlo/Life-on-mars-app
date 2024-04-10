@@ -61,7 +61,7 @@ app.get("/latestPhotos", async (req, res) => {
 });
 
 app.post("/submit", async (req, res) => {
-  console.log(req.body.date);
+  console.log(req.body);
   //Checking which rovers are available for this day
   let possibleRovers = rovers.filter(
     (r) =>
@@ -87,11 +87,12 @@ app.post("/submit", async (req, res) => {
       }
     } catch (error) {}
   }
-  console.log(photo.rover);
+  console.log("lmao");
   res.render("photo.ejs", {
     photo: photo,
     rovers: rovers,
   });
+  console.log("lmao");
 });
 
 app.get("/currentDistance", async (req, res) => {
