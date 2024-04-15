@@ -9,27 +9,30 @@ var dropdownDays = $(".select-day .select-dropdown");
 var dropdownInputs = $(".dropdown-input");
 var selectButtons = $(".select-button");
 
-var passingData = $(".actual-data");
-
 var chosenDate = {
-  year: 0,
-  month: "",
-  day: 0,
+  year: 2004,
+  month: 1,
+  day: 5,
 };
 
+function Month(name, numberOfDays) {
+  this.name = name;
+  this.numberOfDays = numberOfDays;
+}
+
 const months = [
-  "January",
-  "February",
-  "March",
-  "April",
-  "May",
-  "June",
-  "July",
-  "August",
-  "September",
-  "October",
-  "November",
-  "December",
+  new Month("January", 31),
+  new Month("February", 28),
+  new Month("March", 31),
+  new Month("April", 30),
+  new Month("May", 31),
+  new Month("June", 30),
+  new Month("July", 31),
+  new Month("August", 31),
+  new Month("September", 30),
+  new Month("October", 31),
+  new Month("November", 30),
+  new Month("December", 31),
 ];
 
 $(function () {
@@ -72,51 +75,47 @@ function populateYears() {
       .appendTo(dropdownYear);
     $(`input#year-${i}`).next().addBack().wrapAll("<li>");
   }
+  $(`#year-${chosenDate.year}`).attr("checked", "true");
+  $(`#year-${chosenDate.year}`).trigger("change");
 }
 
 function populateMonths() {
   dropdownMonth.empty();
+  var numberOfMonths = 12;
+
+  $(".select-month button span").text("Month");
   if (chosenDate.year == highestPossibleDate.year) {
-    for (i = 0; i < highestPossibleDate.month; i++) {
-      jQuery("<input/>", {
-        id: `month-${months[i]}`,
-        class: "dropdown-input",
-        name: "month",
-        type: "radio",
-        value: i + 1,
-      })
-        .on("change", changeValue)
-        .appendTo(dropdownMonth);
-      jQuery("<label>", {
-        for: `month-${months[i]}`,
-      })
-        .text(months[i])
-        .appendTo(dropdownMonth);
-      $(`input#month-${months[i]}`).next().addBack().wrapAll("<li>");
-    }
-  } else {
-    for (i = 0; i < 12; i++) {
-      jQuery("<input/>", {
-        id: `month-${months[i]}`,
-        class: "dropdown-input",
-        name: "month",
-        type: "radio",
-        value: i + 1,
-      })
-        .on("change", changeValue)
-        .appendTo(dropdownMonth);
-      jQuery("<label>", {
-        for: `month-${months[i]}`,
-      })
-        .text(months[i])
-        .appendTo(dropdownMonth);
-      $(`input#month-${months[i]}`).next().addBack().wrapAll("<li>");
-    }
+    numberOfMonths = highestPossibleDate.month;
+  }
+  for (i = 1; i < numberOfMonths + 1; i++) {
+    jQuery("<input/>", {
+      id: `month-${i}`,
+      class: "dropdown-input",
+      name: "month",
+      type: "radio",
+      value: i,
+      required: "true",
+    })
+      .on("change", changeValue)
+      .appendTo(dropdownMonth);
+    jQuery("<label>", {
+      for: `month-${i}`,
+    })
+      .text(months[i - 1].name)
+      .appendTo(dropdownMonth);
+    $(`input#month-${i}`).next().addBack().wrapAll("<li>");
+  }
+  if (chosenDate.year != highestPossibleDate.year) {
+    // console.log($(`#day-${chosenDate.day}`)[0]);
+    console.log($(`#month-${chosenDate.month}`));
+    $(`#month-${chosenDate.month}`).attr("checked", "true");
+    $(`#month-${chosenDate.month}`).trigger("change");
   }
 }
 
 function populateDays() {
   dropdownDays.empty();
+  $(".select-day button span").text("Day");
   var monthLength = 31;
   if (chosenDate.month == 2) {
     if (chosenDate.year % 4 == 0) {
@@ -125,41 +124,53 @@ function populateDays() {
       monthLength = 29;
     }
   } else {
-    if (
-      (chosenDate.month <= 7 && chosenDate.month % 2 != 0) ||
-      (chosenDate.month > 7 && chosenDate.month % 2 === 0)
-    ) {
-      monthLength = 32;
-    } else {
-      monthLength = 31;
-    }
+    monthLength = months[chosenDate.month - 1].numberOfDays + 1;
   }
   for (i = 1; i < monthLength; i++) {
-    jQuery("<input/>", {
+    var $input = jQuery("<input/>", {
       id: `day-${i}`,
       class: "dropdown-input",
       name: "day",
       type: "radio",
       value: i,
-    })
-      .on("change", changeValue)
-      .appendTo(dropdownDays);
-    jQuery("<label>", {
+      required: "true",
+    }).on("change", changeValue);
+
+    var $label = jQuery("<label>", {
       for: `day-${i}`,
-    })
-      .text(i)
-      .appendTo(dropdownDays);
-    $(`input#day-${i}`).next().addBack().wrapAll("<li>");
+    }).text(i);
+    var $li = jQuery("<li>", {
+      id: `day-${i}-card`,
+    });
+    dropdownDays.append($input).append($label);
+    $(`input#day-${i}`).next().addBack().wrapAll($li);
+  }
+  if (chosenDate.day < monthLength - 1) {
+    // console.log($(`#day-${chosenDate.day}`)[0]);
+    $(`#day-${chosenDate.day}`).attr("checked", "true");
+    $(`#day-${chosenDate.day}`).trigger("change");
   }
 }
 
 function changeValue() {
+  chosenDate[this.name] = $(this).val();
+  console.log(this);
+  // checkIfDatePossible(this);
   if (this.name === "month") {
+    populateDays();
     $(this)
       .parents("ul")
       .siblings("button")
       .children("span")
-      .text(months[$(this).val() - 1]);
+      .text(months[$(this).val() - 1].name);
+  } else if (this.name === "year") {
+    populateDays();
+    populateMonths();
+    $(this)
+      .parents("ul")
+      .siblings("button")
+      .children("span")
+      .text($(this).val());
   } else {
     $(this)
       .parents("ul")
@@ -168,10 +179,27 @@ function changeValue() {
       .text($(this).val());
   }
 
-  $(this).closest(".select-dropdown").toggleClass("active");
-  $(this).parents(".dropdown-menu").toggleClass("active");
-  chosenDate[this.name] = $(this).val();
-  passingData.val(JSON.stringify(chosenDate));
-  populateMonths();
-  populateDays();
+  $(this).closest(".select-dropdown").removeClass("active");
+  $(this).parents(".dropdown-menu").removeClass("active");
+}
+
+function checkIfDatePossible(obj) {
+  console.log(obj);
+  if (obj.name === "month") {
+    console.log("Month");
+    if (chosenDate.day > months[$(obj).val()].numberOfDays) {
+      // populateDays();
+      return false;
+    }
+  }
+  if (this.name === "year") {
+    if ($(obj).val() == highestPossibleDate.year) {
+      // populateMonths();
+      return false;
+    }
+    if (chosenDate.month == 2) {
+      // populateDays();
+      return false;
+    }
+  }
 }

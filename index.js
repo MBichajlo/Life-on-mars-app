@@ -1,7 +1,7 @@
 import express from "express";
 
 import bodyParser from "body-parser";
-import { dirname } from "path";
+import { dirname, parse } from "path";
 import { fileURLToPath } from "url";
 import axios from "axios";
 import dotenv from "dotenv/config";
@@ -62,22 +62,29 @@ app.get("/latestPhotos", async (req, res) => {
 
 app.post("/submit", async (req, res) => {
   console.log(req.body);
+  const data = req.body;
+  var date = new Date(
+    parseInt(data.year),
+    parseInt(data.month) - 1,
+    parseInt(data.day),
+    2
+  );
+  date = date.toISOString().split("T")[0];
+  console.log(date);
   //Checking which rovers are available for this day
   let possibleRovers = rovers.filter(
-    (r) =>
-      r.latestPossibleDate > req.body.date &&
-      r.earliestPossibleDate < req.body.date
+    (r) => r.latestPossibleDate > date && r.earliestPossibleDate < date
   );
-  console.log(possibleRovers);
+  // console.log(possibleRovers);
   var photo = "";
 
   //api calls for each possible rover to determine if any of them took any photos on a given date
   for (const r of possibleRovers) {
     try {
       const nasaResponse = await axios.get(
-        `http://mars-photos.herokuapp.com/api/v1/rovers/${r.name}/photos?earth_date=${req.body.date}`
+        `http://mars-photos.herokuapp.com/api/v1/rovers/${r.name}/photos?earth_date=${date}`
       );
-      console.log(nasaResponse.data);
+      // console.log(nasaResponse.data);
       if (nasaResponse.data.photos.length != 0) {
         photo =
           nasaResponse.data.photos[
